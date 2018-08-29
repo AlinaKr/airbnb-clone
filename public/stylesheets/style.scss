@@ -1,8 +1,5 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+$primary: #dd3333;
 
-a {
-  color: #00B7FF;
-}
+
+// First: npm install --save bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap'
