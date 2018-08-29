@@ -43,8 +43,7 @@ authRoutes.post("/signup", (req, res, next) => {
 
     const newUser = new User({
       username,
-      password: hashPass,
-      role:"teacher"
+      password: hashPass
     });
 
     newUser.save((err) => {

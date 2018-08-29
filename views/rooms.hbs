@@ -1,0 +1,10 @@
+<h1>All rooms</h1>
+
+<ul>
+{{#each rooms}}
+  <li>
+    {{this.name}}
+    ({{this._owner.username}})
+  </li>
+{{/each}}
+</ul>
