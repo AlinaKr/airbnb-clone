@@ -38,9 +38,44 @@ router.get("/rooms" , (req,res,next)=>{
   })
 })
 
+// router.get('/rooms/:id/edit', checkRoles('ADMIN'), (req, res, next) => {
+//   Room.findById(req.params.id)
+//   .then(room => {
+//     res.render('room-edit', { room });
+//   })
+// });
+
+router.get('/rooms/:id/edit', (req, res, next) => {
+  Room.findById(req.params.id)
+  .then(room => {
+    if (req.isAuthenticated() && (req.user.role === 'ADMIN' || req.user._id.toString() === room._owner.toString() ) ) {
+      res.render('room-edit', { room });
+    } else {
+      res.redirect('/auth/login')
+    }
+  })
+});
+
+router.post('/rooms/:id/edit', checkRoles('ADMIN'), (req, res, next) => {
+  Room.findByIdAndUpdate(req.params.id, {
+    name: req.body.name,
+    description: req.body.description,
+  }, { new: true })
+  .then(room => {
+    res.redirect("/rooms/"+ room._id)
+  })
+});
+
+function checkRoles(role) {
+  return function(req, res, next) {
+    if (req.isAuthenticated() && req.user.role === role) {
+      return next();
+    } else {
+      res.redirect('/auth/login')
+    }
+  }
+}
+
+
 module.exports = router;
 
-
-
-console.log("ensureLoggedIn", 
-  ensureLoggedIn('/ironhack'));

@@ -1,0 +1,7 @@
+<h2>Edit room</h2>
+
+<form action="/rooms/{{room._id}}/edit" method="POST">
+  <input class="form-control" name='name' type='text' placeholder="Room name" value="{{room.name}}"> <br>
+  <textarea class="form-control" name="description" cols="30" rows="10" placeholder="Room description">{{room.description}}</textarea> <br>
+  <button class="btn btn-primary">Create New Room</button>
+</form>
